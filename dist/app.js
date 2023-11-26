@@ -9,7 +9,7 @@ const user_route_1 = require("./app/user/user.route");
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
-app.use('/api/users', user_route_1.userRoutes);
+app.use('/', user_route_1.userRoutes);
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
