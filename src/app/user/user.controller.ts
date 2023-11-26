@@ -8,11 +8,11 @@ const createUser = async (req: Request, res: Response) => {
 
     const zodParsedData = UserZodValidation.parse(UserData);
     const result = await userServices.createUserIntoDB(zodParsedData);
-
+const data = await userServices.getUserFromDB((result.userId).toString())
     res.status(200).json({
       success: true,
       massage: 'student found successfully',
-      data: result,
+      data: data,
     });
   } catch (err) {
     res.status(500).json({

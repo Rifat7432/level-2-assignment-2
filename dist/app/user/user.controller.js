@@ -20,10 +20,11 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const { user: UserData } = req.body;
         const zodParsedData = user_validation_zod_1.default.parse(UserData);
         const result = yield user_service_1.userServices.createUserIntoDB(zodParsedData);
+        const data = yield user_service_1.userServices.getUserFromDB((result.userId).toString());
         res.status(200).json({
             success: true,
             massage: 'student found successfully',
-            data: result,
+            data: data,
         });
     }
     catch (err) {
