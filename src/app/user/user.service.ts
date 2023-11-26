@@ -11,6 +11,10 @@ const addUserOrdersIntoDB = async (id:string,order: Orders) => {
   }});
   return result;
 };
+const getUserOrdersIntoDB = async (id:string) => {
+  const result = await UserModel.findOne({userId:id});
+  return result;
+};
 const deleteUserIntoDB = async (id:string) => {
   const result = await UserModel.updateOne({userId:id},{$set:{
     isDeleted:true
@@ -80,5 +84,6 @@ export const userServices = {
   getUserFromDB,
   updateUserIntoDB,
   deleteUserIntoDB,
-  addUserOrdersIntoDB
+  addUserOrdersIntoDB,
+  getUserOrdersIntoDB
 };

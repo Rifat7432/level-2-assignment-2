@@ -126,6 +126,34 @@ const addUserOrder = async (req: Request, res: Response) => {
     });
   }
 };
+const getUserAllOrders = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.userId;
+    const result = await userServices.getUserOrdersIntoDB(id);
+    if (result) {
+      res.status(200).json({
+        success: true,
+        massage: 'Order fetched successfully!',
+        data:{orders:result?.orders},
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        message: 'User not found',
+        error: {
+          code: 404,
+          description: 'User not found!',
+        },
+      });
+    }
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      massage: 'something went wrong',
+      error: err,
+    });
+  }
+};
 const getUser = async (req: Request, res: Response) => {
   try {
     const id = req.params.userId;
@@ -162,4 +190,5 @@ export const userController = {
   updateUser,
   deleteUser,
   addUserOrder,
+  getUserAllOrders
 };

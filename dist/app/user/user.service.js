@@ -21,6 +21,10 @@ const addUserOrdersIntoDB = (id, order) => __awaiter(void 0, void 0, void 0, fun
         } });
     return result;
 });
+const getUserOrdersIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield user_model_1.UserModel.findOne({ userId: id });
+    return result;
+});
 const deleteUserIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_model_1.UserModel.updateOne({ userId: id }, { $set: {
             isDeleted: true
@@ -66,5 +70,6 @@ exports.userServices = {
     getUserFromDB,
     updateUserIntoDB,
     deleteUserIntoDB,
-    addUserOrdersIntoDB
+    addUserOrdersIntoDB,
+    getUserOrdersIntoDB
 };
