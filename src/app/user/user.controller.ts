@@ -8,7 +8,7 @@ const createUser = async (req: Request, res: Response) => {
 
     const zodParsedData = UserZodValidation.parse(UserData);
     const result = await userServices.createUserIntoDB(zodParsedData);
-const data = await userServices.getUserFromDB((result.userId).toString())
+    const data = await userServices.getUserFromDB(result.userId.toString());
     res.status(200).json({
       success: true,
       massage: 'student found successfully',
@@ -97,6 +97,35 @@ const updateUser = async (req: Request, res: Response) => {
     });
   }
 };
+const addUserOrder = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.userId;
+    const data = req.body;
+    const result = await userServices.addUserOrdersIntoDB(id, data);
+    if (result.modifiedCount === 1) {
+      res.status(200).json({
+        success: true,
+        message: 'Order created successfully!',
+        data: null,
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        message: 'User not found',
+        error: {
+          code: 404,
+          description: 'User not found!',
+        },
+      });
+    }
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      massage: 'something went wrong',
+      error: err,
+    });
+  }
+};
 const getUser = async (req: Request, res: Response) => {
   try {
     const id = req.params.userId;
@@ -132,4 +161,5 @@ export const userController = {
   getUser,
   updateUser,
   deleteUser,
+  addUserOrder,
 };

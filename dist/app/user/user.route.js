@@ -12,4 +12,5 @@ router.get('/api/users', user_controller_1.userController.getAllUsers);
 router.get('/api/users/:userId', user_controller_1.userController.getUser);
 router.put('/api/users/:userId', user_controller_1.userController.updateUser);
 router.delete('/api/users/:userId', user_controller_1.userController.deleteUser);
+router.put('/api/users/:userId/orders', user_controller_1.userController.addUserOrder);
 exports.userRoutes = router;

@@ -20,7 +20,7 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const { user: UserData } = req.body;
         const zodParsedData = user_validation_zod_1.default.parse(UserData);
         const result = yield user_service_1.userServices.createUserIntoDB(zodParsedData);
-        const data = yield user_service_1.userServices.getUserFromDB((result.userId).toString());
+        const data = yield user_service_1.userServices.getUserFromDB(result.userId.toString());
         res.status(200).json({
             success: true,
             massage: 'student found successfully',
@@ -114,6 +114,37 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         });
     }
 });
+const addUserOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.userId;
+        const data = req.body;
+        const result = yield user_service_1.userServices.addUserOrdersIntoDB(id, data);
+        if (result.modifiedCount === 1) {
+            res.status(200).json({
+                success: true,
+                message: 'Order created successfully!',
+                data: null,
+            });
+        }
+        else {
+            res.status(500).json({
+                success: false,
+                message: 'User not found',
+                error: {
+                    code: 404,
+                    description: 'User not found!',
+                },
+            });
+        }
+    }
+    catch (err) {
+        res.status(500).json({
+            success: false,
+            massage: 'something went wrong',
+            error: err,
+        });
+    }
+});
 const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.userId;
@@ -150,4 +181,5 @@ exports.userController = {
     getUser,
     updateUser,
     deleteUser,
+    addUserOrder,
 };

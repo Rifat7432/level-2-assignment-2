@@ -11,11 +11,11 @@ const AddressZodValidation = z.object({
   country: z.string().nonempty(),
 });
 
-// const OrdersZodValidation = z.object({
-//   productName: z.string().nonempty(),
-//   price: z.number().nonnegative(),
-//   quantity: z.number().nonnegative(),
-// });
+const OrdersZodValidation = z.object({
+  productName: z.string().nonempty(),
+  price: z.number().nonnegative(),
+  quantity: z.number().nonnegative(),
+});
 
 const UserZodValidation = z.object({
   userId: z.number().int(),
@@ -27,7 +27,7 @@ const UserZodValidation = z.object({
   isActive: z.boolean(),
   hobbies: z.array(z.string()),
   address: AddressZodValidation,
-  // orders: z.array(OrdersZodValidation),
+  orders: z.array(OrdersZodValidation).optional(),
   isDeleted: z.boolean().default(false)
 });
 

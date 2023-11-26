@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { Address, FullName, User } from './user.interface';
+import { Address, FullName, User,Orders } from './user.interface';
 import bcrypt from 'bcrypt';
 import config from '../config';
 
@@ -14,11 +14,11 @@ const AddressSchema = new Schema<Address>({
   country: { type: String, required: true },
 });
 
-// const OrdersSchema = new Schema<Orders>({
-//   productName:{type:String,required:true},
-//   price:{type:Number,required:true},
-//   quantity:{type:Number,required:true}
-// });
+const OrdersSchema = new Schema<Orders>({
+  productName:{type:String,required:true},
+  price:{type:Number,required:true},
+  quantity:{type:Number,required:true}
+});
 
 const UserSchema = new Schema<User>({
   userId: { unique: true, type: Number, index: true },
@@ -30,6 +30,7 @@ const UserSchema = new Schema<User>({
   isActive: { type: Boolean, required: true },
   hobbies: [{ type: String, required: true }],
   address: { type: AddressSchema, required: true },
+  orders:{type:[OrdersSchema]},
   isDeleted:{type:Boolean,default:false}
 });
 

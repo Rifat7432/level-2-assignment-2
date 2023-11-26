@@ -25,11 +25,11 @@ const AddressSchema = new mongoose_1.Schema({
     city: { type: String, required: true },
     country: { type: String, required: true },
 });
-// const OrdersSchema = new Schema<Orders>({
-//   productName:{type:String,required:true},
-//   price:{type:Number,required:true},
-//   quantity:{type:Number,required:true}
-// });
+const OrdersSchema = new mongoose_1.Schema({
+    productName: { type: String, required: true },
+    price: { type: Number, required: true },
+    quantity: { type: Number, required: true }
+});
 const UserSchema = new mongoose_1.Schema({
     userId: { unique: true, type: Number, index: true },
     username: { type: String, required: true, unique: true, index: true },
@@ -40,6 +40,7 @@ const UserSchema = new mongoose_1.Schema({
     isActive: { type: Boolean, required: true },
     hobbies: [{ type: String, required: true }],
     address: { type: AddressSchema, required: true },
+    orders: { type: [OrdersSchema] },
     isDeleted: { type: Boolean, default: false }
 });
 UserSchema.pre('save', function (next) {

@@ -10,11 +10,11 @@ const AddressZodValidation = zod_1.z.object({
     city: zod_1.z.string().nonempty(),
     country: zod_1.z.string().nonempty(),
 });
-// const OrdersZodValidation = z.object({
-//   productName: z.string().nonempty(),
-//   price: z.number().nonnegative(),
-//   quantity: z.number().nonnegative(),
-// });
+const OrdersZodValidation = zod_1.z.object({
+    productName: zod_1.z.string().nonempty(),
+    price: zod_1.z.number().nonnegative(),
+    quantity: zod_1.z.number().nonnegative(),
+});
 const UserZodValidation = zod_1.z.object({
     userId: zod_1.z.number().int(),
     username: zod_1.z.string().nonempty(),
@@ -25,7 +25,7 @@ const UserZodValidation = zod_1.z.object({
     isActive: zod_1.z.boolean(),
     hobbies: zod_1.z.array(zod_1.z.string()),
     address: AddressZodValidation,
-    // orders: z.array(OrdersZodValidation),
+    orders: zod_1.z.array(OrdersZodValidation).optional(),
     isDeleted: zod_1.z.boolean().default(false)
 });
 exports.default = UserZodValidation;
