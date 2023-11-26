@@ -2,7 +2,6 @@ import { userServices } from './user.service';
 import { Request, Response } from 'express';
 import UserZodValidation from './user.validation.zod';
 
-
 const createUser = async (req: Request, res: Response) => {
   try {
     const { user: UserData } = req.body;
@@ -43,13 +42,12 @@ const getAllUsers = async (req: Request, res: Response) => {
 const deleteUser = async (req: Request, res: Response) => {
   try {
     const id = req.params.userId;
-    
     const result = await userServices.deleteUserIntoDB(id);
     if (result.modifiedCount === 1) {
       res.status(200).json({
-        "success": true,
-        "message": "User deleted successfully!",
-        "data" : null
+        success: true,
+        message: 'User deleted successfully!',
+        data: null,
       });
     } else {
       res.status(500).json({
@@ -72,10 +70,10 @@ const deleteUser = async (req: Request, res: Response) => {
 const updateUser = async (req: Request, res: Response) => {
   try {
     const id = req.params.userId;
-    const data = req.body
-    const result = await userServices.updateUserIntoDB(id,data);
+    const data = req.body;
+    const result = await userServices.updateUserIntoDB(id, data);
     if (result.modifiedCount === 1) {
-      const userData = await userServices.getUserFromDB(id)
+      const userData = await userServices.getUserFromDB(id);
       res.status(200).json({
         success: true,
         massage: 'student found successfully',
@@ -133,5 +131,5 @@ export const userController = {
   getAllUsers,
   getUser,
   updateUser,
-  deleteUser
+  deleteUser,
 };

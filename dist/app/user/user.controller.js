@@ -57,9 +57,9 @@ const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const result = yield user_service_1.userServices.deleteUserIntoDB(id);
         if (result.modifiedCount === 1) {
             res.status(200).json({
-                "success": true,
-                "message": "User deleted successfully!",
-                "data": null
+                success: true,
+                message: 'User deleted successfully!',
+                data: null,
             });
         }
         else {
@@ -148,5 +148,5 @@ exports.userController = {
     getAllUsers,
     getUser,
     updateUser,
-    deleteUser
+    deleteUser,
 };
