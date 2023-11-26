@@ -5,10 +5,40 @@ const createUserIntoDB = async (user: User) => {
   const result = await UserModel.create(user);
   return result;
 };
-const updateUserIntoDB = async (userId: string,dataToUpdate:User) => {
-  const result = await UserModel.updateOne({userId},dataToUpdate);
+const updateUserIntoDB = async (id: string, dataToUpdate: User) => {
+  const {
+    userId,
+    username,
+    password,
+    fullName,
+    age,
+    email,
+    isActive,
+    hobbies,
+    address,
+  } = dataToUpdate;
+  const result = await UserModel.updateOne(
+    { userId: id },
+    {
+      $set: {
+        userId,
+        username,
+        password,
+        fullName,
+        age,
+        email,
+        isActive,
+        hobbies,
+        address,
+      },
+    },
+  );
   return result;
 };
+
+
+
+
 const getAllUsersFromDB = async () => {
   const result = await UserModel.find(
     {},
@@ -36,5 +66,5 @@ export const userServices = {
   createUserIntoDB,
   getAllUsersFromDB,
   getUserFromDB,
-  updateUserIntoDB
+  updateUserIntoDB,
 };

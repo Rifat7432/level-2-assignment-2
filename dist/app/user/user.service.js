@@ -15,8 +15,21 @@ const createUserIntoDB = (user) => __awaiter(void 0, void 0, void 0, function* (
     const result = yield user_model_1.UserModel.create(user);
     return result;
 });
-const updateUserIntoDB = (userId, dataToUpdate) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield user_model_1.UserModel.updateOne({ userId }, dataToUpdate);
+const updateUserIntoDB = (id, dataToUpdate) => __awaiter(void 0, void 0, void 0, function* () {
+    const { userId, username, password, fullName, age, email, isActive, hobbies, address, } = dataToUpdate;
+    const result = yield user_model_1.UserModel.updateOne({ userId: id }, {
+        $set: {
+            userId,
+            username,
+            password,
+            fullName,
+            age,
+            email,
+            isActive,
+            hobbies,
+            address,
+        },
+    });
     return result;
 });
 const getAllUsersFromDB = () => __awaiter(void 0, void 0, void 0, function* () {
@@ -39,5 +52,5 @@ exports.userServices = {
     createUserIntoDB,
     getAllUsersFromDB,
     getUserFromDB,
-    updateUserIntoDB
+    updateUserIntoDB,
 };

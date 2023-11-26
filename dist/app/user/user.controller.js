@@ -54,24 +54,26 @@ const getAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.userId;
-        console.log(id);
-        // const result = await userServices.updateUserIntoDB(id,);
-        // if (result) {
-        //   res.status(200).json({
-        //     success: true,
-        //     massage: 'student found successfully',
-        //     data: result,
-        //   });
-        // } else {
-        //   res.status(500).json({
-        //     success: false,
-        //     message: 'User not found',
-        //     error: {
-        //       code: 404,
-        //       description: 'User not found!',
-        //     },
-        //   });
-        // }
+        const data = req.body;
+        const result = yield user_service_1.userServices.updateUserIntoDB(id, data);
+        if (result.modifiedCount === 1) {
+            const userData = yield user_service_1.userServices.getUserFromDB(id);
+            res.status(200).json({
+                success: true,
+                massage: 'student found successfully',
+                data: userData,
+            });
+        }
+        else {
+            res.status(500).json({
+                success: false,
+                message: 'User not found',
+                error: {
+                    code: 404,
+                    description: 'User not found!',
+                },
+            });
+        }
     }
     catch (err) {
         res.status(500).json({
