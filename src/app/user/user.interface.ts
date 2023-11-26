@@ -25,5 +25,6 @@ export type User = {
     hobbies: string[];
     address:Address;
     // orders:Orders[];
+    isDeleted:boolean
   }
   

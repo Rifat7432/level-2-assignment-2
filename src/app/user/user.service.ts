@@ -5,6 +5,10 @@ const createUserIntoDB = async (user: User) => {
   const result = await UserModel.create(user);
   return result;
 };
+const deleteUserIntoDB = async (user: User) => {
+  const result = await UserModel.updateOne(user);
+  return result;
+};
 const updateUserIntoDB = async (id: string, dataToUpdate: User) => {
   const {
     userId,
@@ -67,4 +71,5 @@ export const userServices = {
   getAllUsersFromDB,
   getUserFromDB,
   updateUserIntoDB,
+  deleteUserIntoDB
 };

@@ -26,5 +26,6 @@ const UserZodValidation = zod_1.z.object({
     hobbies: zod_1.z.array(zod_1.z.string()),
     address: AddressZodValidation,
     // orders: z.array(OrdersZodValidation),
+    isDeleted: zod_1.z.boolean().refine((val) => val === true)
 });
 exports.default = UserZodValidation;

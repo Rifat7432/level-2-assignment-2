@@ -40,6 +40,7 @@ const UserSchema = new mongoose_1.Schema({
     isActive: { type: Boolean, required: true },
     hobbies: [{ type: String, required: true }],
     address: { type: AddressSchema, required: true },
+    isDeleted: { type: Boolean, default: false }
 });
 UserSchema.pre('save', function (next) {
     return __awaiter(this, void 0, void 0, function* () {

@@ -30,6 +30,7 @@ const UserSchema = new Schema<User>({
   isActive: { type: Boolean, required: true },
   hobbies: [{ type: String, required: true }],
   address: { type: AddressSchema, required: true },
+  isDeleted:{type:Boolean,default:false}
 });
 
 UserSchema.pre('save', async function (next) {
