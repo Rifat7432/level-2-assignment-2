@@ -10,6 +10,7 @@ const router = express_1.default.Router();
 router.post('/api/users', user_controller_1.userController.createUser);
 router.get('/api/users', user_controller_1.userController.getAllUsers);
 router.get('/api/users/:userId/orders', user_controller_1.userController.getUserAllOrders);
+router.get('/api/users/:userId/orders/total-price', user_controller_1.userController.getUserAllOrdersTotalPrice);
 router.get('/api/users/:userId', user_controller_1.userController.getUser);
 router.put('/api/users/:userId', user_controller_1.userController.updateUser);
 router.put('/api/users/:userId/orders', user_controller_1.userController.addUserOrder);

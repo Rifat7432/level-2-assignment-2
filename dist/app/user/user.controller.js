@@ -23,7 +23,7 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const data = yield user_service_1.userServices.getUserFromDB(result.userId.toString());
         res.status(200).json({
             success: true,
-            massage: 'student found successfully',
+            massage: 'user found successfully',
             data: data,
         });
     }
@@ -175,6 +175,36 @@ const getUserAllOrders = (req, res) => __awaiter(void 0, void 0, void 0, functio
         });
     }
 });
+const getUserAllOrdersTotalPrice = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.userId;
+        const result = yield user_service_1.userServices.getUserOrdersTotalPriceIntoDB(id);
+        if (result) {
+            res.status(200).json({
+                success: true,
+                massage: 'Order fetched successfully!',
+                data: result,
+            });
+        }
+        else {
+            res.status(500).json({
+                success: false,
+                message: 'User not found',
+                error: {
+                    code: 404,
+                    description: 'User not found!',
+                },
+            });
+        }
+    }
+    catch (err) {
+        res.status(500).json({
+            success: false,
+            massage: 'something went wrong',
+            error: err,
+        });
+    }
+});
 const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.userId;
@@ -212,5 +242,6 @@ exports.userController = {
     updateUser,
     deleteUser,
     addUserOrder,
-    getUserAllOrders
+    getUserAllOrders,
+    getUserAllOrdersTotalPrice
 };

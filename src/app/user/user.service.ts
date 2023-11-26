@@ -5,20 +5,34 @@ const createUserIntoDB = async (user: User) => {
   const result = await UserModel.create(user);
   return result;
 };
-const addUserOrdersIntoDB = async (id:string,order: Orders) => {
-  const result = await UserModel.updateOne({userId:id},{$push:{
-    orders:order
-  }});
+const addUserOrdersIntoDB = async (id: string, order: Orders) => {
+  const result = await UserModel.updateOne(
+    { userId: id },
+    {
+      $push: {
+        orders: order,
+      },
+    },
+  );
   return result;
 };
-const getUserOrdersIntoDB = async (id:string) => {
-  const result = await UserModel.findOne({userId:id});
+const getUserOrdersIntoDB = async (id: string) => {
+  const result = await UserModel.findOne({ userId: id });
   return result;
 };
-const deleteUserIntoDB = async (id:string) => {
-  const result = await UserModel.updateOne({userId:id},{$set:{
-    isDeleted:true
-  }});
+const getUserOrdersTotalPriceIntoDB = async (id:string) => {
+  const result = await UserModel.findOne({userId:id})
+  return result;
+};
+const deleteUserIntoDB = async (id: string) => {
+  const result = await UserModel.updateOne(
+    { userId: id },
+    {
+      $set: {
+        isDeleted: true,
+      },
+    },
+  );
   return result;
 };
 const updateUserIntoDB = async (id: string, dataToUpdate: User) => {
@@ -52,9 +66,6 @@ const updateUserIntoDB = async (id: string, dataToUpdate: User) => {
   return result;
 };
 
-
-
-
 const getAllUsersFromDB = async () => {
   const result = await UserModel.find(
     {},
@@ -85,5 +96,6 @@ export const userServices = {
   updateUserIntoDB,
   deleteUserIntoDB,
   addUserOrdersIntoDB,
-  getUserOrdersIntoDB
+  getUserOrdersIntoDB,
+  getUserOrdersTotalPriceIntoDB,
 };

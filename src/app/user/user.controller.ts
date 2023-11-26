@@ -11,7 +11,7 @@ const createUser = async (req: Request, res: Response) => {
     const data = await userServices.getUserFromDB(result.userId.toString());
     res.status(200).json({
       success: true,
-      massage: 'student found successfully',
+      massage: 'user found successfully',
       data: data,
     });
   } catch (err) {
@@ -154,6 +154,34 @@ const getUserAllOrders = async (req: Request, res: Response) => {
     });
   }
 };
+const getUserAllOrdersTotalPrice = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.userId;
+    const result = await userServices.getUserOrdersTotalPriceIntoDB(id);
+    if (result) {
+      res.status(200).json({
+        success: true,
+        massage: 'Order fetched successfully!',
+        data:result,
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        message: 'User not found',
+        error: {
+          code: 404,
+          description: 'User not found!',
+        },
+      });
+    }
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      massage: 'something went wrong',
+      error: err,
+    });
+  }
+};
 const getUser = async (req: Request, res: Response) => {
   try {
     const id = req.params.userId;
@@ -190,5 +218,6 @@ export const userController = {
   updateUser,
   deleteUser,
   addUserOrder,
-  getUserAllOrders
+  getUserAllOrders,
+  getUserAllOrdersTotalPrice
 };
