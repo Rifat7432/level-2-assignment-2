@@ -15,8 +15,10 @@ const createUserIntoDB = (user) => __awaiter(void 0, void 0, void 0, function* (
     const result = yield user_model_1.UserModel.create(user);
     return result;
 });
-const deleteUserIntoDB = (user) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield user_model_1.UserModel.updateOne(user);
+const deleteUserIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield user_model_1.UserModel.updateOne({ userId: id }, { $set: {
+            isDeleted: true
+        } });
     return result;
 });
 const updateUserIntoDB = (id, dataToUpdate) => __awaiter(void 0, void 0, void 0, function* () {

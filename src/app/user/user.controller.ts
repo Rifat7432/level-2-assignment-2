@@ -43,14 +43,13 @@ const getAllUsers = async (req: Request, res: Response) => {
 const deleteUser = async (req: Request, res: Response) => {
   try {
     const id = req.params.userId;
-    const data = req.body
-    const result = await userServices.updateUserIntoDB(id,data);
+    
+    const result = await userServices.deleteUserIntoDB(id);
     if (result.modifiedCount === 1) {
-      const userData = await userServices.getUserFromDB(id)
       res.status(200).json({
-        success: true,
-        massage: 'student found successfully',
-        data: userData,
+        "success": true,
+        "message": "User deleted successfully!",
+        "data" : null
       });
     } else {
       res.status(500).json({

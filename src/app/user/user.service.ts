@@ -5,8 +5,10 @@ const createUserIntoDB = async (user: User) => {
   const result = await UserModel.create(user);
   return result;
 };
-const deleteUserIntoDB = async (user: User) => {
-  const result = await UserModel.updateOne(user);
+const deleteUserIntoDB = async (id:string) => {
+  const result = await UserModel.updateOne({userId:id},{$set:{
+    isDeleted:true
+  }});
   return result;
 };
 const updateUserIntoDB = async (id: string, dataToUpdate: User) => {

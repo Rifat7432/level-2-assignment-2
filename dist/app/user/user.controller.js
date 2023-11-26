@@ -54,14 +54,12 @@ const getAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.userId;
-        const data = req.body;
-        const result = yield user_service_1.userServices.updateUserIntoDB(id, data);
+        const result = yield user_service_1.userServices.deleteUserIntoDB(id);
         if (result.modifiedCount === 1) {
-            const userData = yield user_service_1.userServices.getUserFromDB(id);
             res.status(200).json({
-                success: true,
-                massage: 'student found successfully',
-                data: userData,
+                "success": true,
+                "message": "User deleted successfully!",
+                "data": null
             });
         }
         else {
