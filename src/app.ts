@@ -8,7 +8,7 @@ app.use(cors());
 app.use('/',userRoutes)
 
 app.get('/', (req, res) => {
-  res.send('assignment 2 server');
+  res.json({"success":true,"massage":"welcome to Level 2 assignment 2"});
 });
 
 export default app;

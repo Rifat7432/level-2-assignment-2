@@ -33,7 +33,13 @@ const getUserOrdersIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* 
 // service function for posting user in DB
 const getUserOrdersTotalPriceIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_model_1.UserModel.findOne({ userId: id, isDeleted: false });
-    return result;
+    console.log(result);
+    if (result !== null && result.orders) {
+        return result.orders.reduce((totalPrice, order) => totalPrice + order.price, 0);
+    }
+    else {
+        return null;
+    }
 });
 // service function for deleting user in DB
 const deleteUserIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
@@ -75,7 +81,6 @@ const getUserFromDB = (userId) => __awaiter(void 0, void 0, void 0, function* ()
         age: 1,
         email: 1,
         address: 1,
-        orders: 1,
     });
     return result;
 });

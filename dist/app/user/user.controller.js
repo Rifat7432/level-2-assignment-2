@@ -23,7 +23,7 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const data = yield user_service_1.userServices.getUserFromDB(result.userId.toString());
         res.status(200).json({
             success: true,
-            massage: 'user found successfully',
+            massage: 'ser created successfully!',
             data: data,
         });
     }
@@ -40,7 +40,7 @@ const getAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         const result = yield user_service_1.userServices.getAllUsersFromDB();
         res.status(200).json({
             success: true,
-            massage: 'student found successfully',
+            massage: 'Users fetched successfully!y',
             data: result,
         });
     }
@@ -91,7 +91,7 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             const userData = yield user_service_1.userServices.getUserFromDB(id);
             res.status(200).json({
                 success: true,
-                massage: 'student found successfully',
+                massage: 'User updated successfully!',
                 data: userData,
             });
         }

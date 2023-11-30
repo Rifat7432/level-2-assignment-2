@@ -30,7 +30,13 @@ const getUserOrdersIntoDB = async (id: string) => {
 // service function for posting user in DB
 const getUserOrdersTotalPriceIntoDB = async (id:string) => {
   const result = await UserModel.findOne({userId:id,isDeleted:false})
-  return result;
+  console.log(result)
+  if(result !== null && result.orders ){
+  return result.orders.reduce((totalPrice:number, order:Orders) => totalPrice + order.price, 0);
+}
+else{
+  return null
+}
 };
 
 
@@ -97,7 +103,7 @@ const getUserFromDB = async (userId: string) => {
       age: 1,
       email: 1,
       address: 1,
-      orders: 1,
+     
     },
   );
   return result;

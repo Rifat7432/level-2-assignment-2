@@ -12,6 +12,6 @@ app.use((0, cors_1.default)());
 // routes
 app.use('/', user_route_1.userRoutes);
 app.get('/', (req, res) => {
-    res.send('assignment 2 server');
+    res.json({ "success": true, "massage": "welcome to Level 2 assignment 2" });
 });
 exports.default = app;

@@ -11,7 +11,7 @@ const createUser = async (req: Request, res: Response) => {
     const data = await userServices.getUserFromDB(result.userId.toString());
     res.status(200).json({
       success: true,
-      massage: 'user found successfully',
+      massage: 'ser created successfully!',
       data: data,
     });
   } catch (err) {
@@ -28,7 +28,7 @@ const getAllUsers = async (req: Request, res: Response) => {
     const result = await userServices.getAllUsersFromDB();
     res.status(200).json({
       success: true,
-      massage: 'student found successfully',
+      massage: 'Users fetched successfully!y',
       data: result,
     });
   } catch (err) {
@@ -76,7 +76,7 @@ const updateUser = async (req: Request, res: Response) => {
       const userData = await userServices.getUserFromDB(id);
       res.status(200).json({
         success: true,
-        massage: 'student found successfully',
+        massage: 'User updated successfully!',
         data: userData,
       });
     } else {
