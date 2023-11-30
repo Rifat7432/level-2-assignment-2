@@ -4,10 +4,11 @@ import { userRoutes } from './app/user/user.route';
 const app = express();
 app.use(express.json());
 app.use(cors());
+// routes
 app.use('/',userRoutes)
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.send('assignment 2 server');
 });
 
 export default app;
