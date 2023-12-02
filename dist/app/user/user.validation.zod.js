@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.OrdersZodValidation = void 0;
 const zod_1 = require("zod");
 // using zod for validating data
 // FullName Zod Validation
@@ -14,7 +15,7 @@ const AddressZodValidation = zod_1.z.object({
     country: zod_1.z.string().nonempty(),
 });
 // Orders Zod Validation
-const OrdersZodValidation = zod_1.z.object({
+exports.OrdersZodValidation = zod_1.z.object({
     productName: zod_1.z.string().nonempty(),
     price: zod_1.z.number().nonnegative(),
     quantity: zod_1.z.number().nonnegative(),
@@ -30,7 +31,7 @@ const UserZodValidation = zod_1.z.object({
     isActive: zod_1.z.boolean(),
     hobbies: zod_1.z.array(zod_1.z.string()),
     address: AddressZodValidation,
-    orders: zod_1.z.array(OrdersZodValidation).optional(),
+    orders: zod_1.z.array(exports.OrdersZodValidation).optional(),
     isDeleted: zod_1.z.boolean().default(false)
 });
 //exporting User Zod Validation

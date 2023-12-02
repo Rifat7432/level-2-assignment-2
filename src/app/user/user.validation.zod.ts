@@ -17,7 +17,7 @@ const AddressZodValidation = z.object({
 
 
 // Orders Zod Validation
-const OrdersZodValidation = z.object({
+export const OrdersZodValidation = z.object({
   productName: z.string().nonempty(),
   price: z.number().nonnegative(),
   quantity: z.number().nonnegative(),

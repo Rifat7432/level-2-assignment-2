@@ -16,20 +16,24 @@ exports.UserModel = void 0;
 const mongoose_1 = require("mongoose");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const config_1 = __importDefault(require("../config"));
+//schema of full name 
 const FullNameSchema = new mongoose_1.Schema({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
 });
+//schema of address
 const AddressSchema = new mongoose_1.Schema({
     street: { type: String, required: true },
     city: { type: String, required: true },
     country: { type: String, required: true },
 });
+//schema of order
 const OrdersSchema = new mongoose_1.Schema({
     productName: { type: String, required: true },
     price: { type: Number, required: true },
     quantity: { type: Number, required: true }
 });
+//schema of user
 const UserSchema = new mongoose_1.Schema({
     userId: { unique: true, type: Number, index: true },
     username: { type: String, required: true, unique: true, index: true },
@@ -43,16 +47,19 @@ const UserSchema = new mongoose_1.Schema({
     orders: { type: [OrdersSchema] },
     isDeleted: { type: Boolean, default: false }
 });
+// making password hash
 UserSchema.pre('save', function (next) {
     return __awaiter(this, void 0, void 0, function* () {
         this.password = yield bcrypt_1.default.hash(this.password, Number(config_1.default.bcrypt_salt_rounds));
         next();
     });
 });
+// making password ''
 UserSchema.post('save', function (doc, next) {
     return __awaiter(this, void 0, void 0, function* () {
         doc.password = '';
         next();
     });
 });
+//making user model 
 exports.UserModel = (0, mongoose_1.model)('User', UserSchema);
