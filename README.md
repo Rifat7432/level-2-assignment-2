@@ -46,7 +46,7 @@ This project is a typescript and mongoos server.Which is used to create, update,
 }
 ```
 ## 🔗 Server is running on
-[(https://level-2-assignment-2-five.vercel.app)](https://level-2-assignment-2-five.vercel.app)
+[https://level-2-assignment-2-five.vercel.app](https://level-2-assignment-2-five.vercel.app)
 
 
 
