@@ -23,7 +23,7 @@ const createUserIntoDB = (user) => __awaiter(void 0, void 0, void 0, function* (
 });
 // service function for getting all users from DB
 const getAllUsersFromDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield user_model_1.UserModel.find({ isDeleted: false }, { username: 1, fullName: 1, age: 1, email: 1, address: 1, orders: 1 });
+    const result = yield user_model_1.UserModel.find({ isDeleted: false }, { username: 1, fullName: 1, age: 1, email: 1, address: 1 });
     return result;
 });
 // service function for getting a user from DB

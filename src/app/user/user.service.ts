@@ -13,7 +13,7 @@ const createUserIntoDB = async (user: User) => {
 const getAllUsersFromDB = async () => {
   const result = await UserModel.find(
     { isDeleted: false },
-    { username: 1, fullName: 1, age: 1, email: 1, address: 1, orders: 1 },
+    { username: 1, fullName: 1, age: 1, email: 1, address: 1 },
   );
   return result;
 };
