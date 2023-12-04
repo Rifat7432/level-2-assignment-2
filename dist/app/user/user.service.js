@@ -56,7 +56,6 @@ const updateUserIntoDB = (id, dataToUpdate) => __awaiter(void 0, void 0, void 0,
             address,
         },
     });
-    console.log(result);
     return result;
 });
 // service function for deleting user in DB

@@ -50,7 +50,6 @@ const UserSchema = new mongoose_1.Schema({
 // making password hash
 UserSchema.pre('save', function (next) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log(this);
         this.password = yield bcrypt_1.default.hash(this.password, Number(config_1.default.bcrypt_salt_rounds));
         next();
     });

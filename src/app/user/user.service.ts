@@ -70,7 +70,6 @@ const updateUserIntoDB = async (id: string, dataToUpdate: User) => {
       },
     },
   );
-  console.log(result);
   return result;
 };
 
