@@ -8,9 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userServices = void 0;
+const config_1 = __importDefault(require("../config"));
 const user_model_1 = require("./user.model");
+const bcrypt_1 = __importDefault(require("bcrypt"));
 // service function for posting user in DB
 const createUserIntoDB = (user) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_model_1.UserModel.create(user);
@@ -36,11 +41,13 @@ const getUserFromDB = (userId) => __awaiter(void 0, void 0, void 0, function* ()
 // service function for updating user in DB
 const updateUserIntoDB = (id, dataToUpdate) => __awaiter(void 0, void 0, void 0, function* () {
     const { userId, username, password, fullName, age, email, isActive, hobbies, address, } = dataToUpdate;
+    //making password hash
+    const hashPassword = yield bcrypt_1.default.hash(password, Number(config_1.default.bcrypt_salt_rounds));
     const result = yield user_model_1.UserModel.updateOne({ userId: id, isDeleted: false }, {
         $set: {
             userId,
             username,
-            password,
+            password: hashPassword,
             fullName,
             age,
             email,
@@ -49,6 +56,7 @@ const updateUserIntoDB = (id, dataToUpdate) => __awaiter(void 0, void 0, void 0,
             address,
         },
     });
+    console.log(result);
     return result;
 });
 // service function for deleting user in DB

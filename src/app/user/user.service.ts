@@ -1,5 +1,7 @@
+import config from '../config';
 import { Orders, User } from './user.interface';
 import { UserModel } from './user.model';
+import bcrypt from 'bcrypt';
 
 // service function for posting user in DB
 const createUserIntoDB = async (user: User) => {
@@ -46,13 +48,19 @@ const updateUserIntoDB = async (id: string, dataToUpdate: User) => {
     hobbies,
     address,
   } = dataToUpdate;
+  //making password hash
+  const hashPassword = await bcrypt.hash(
+    password,
+    Number(config.bcrypt_salt_rounds),
+  );
+
   const result = await UserModel.updateOne(
     { userId: id, isDeleted: false },
     {
       $set: {
         userId,
         username,
-        password,
+        password: hashPassword,
         fullName,
         age,
         email,
@@ -62,6 +70,7 @@ const updateUserIntoDB = async (id: string, dataToUpdate: User) => {
       },
     },
   );
+  console.log(result);
   return result;
 };
 
@@ -102,7 +111,8 @@ const getUserOrdersTotalPriceIntoDB = async (id: string) => {
   const result = await UserModel.findOne({ userId: id, isDeleted: false });
   if (result !== null && result.orders) {
     const totalPrice = result.orders.reduce(
-      (totalPrice: number, order: Orders) => totalPrice + order.price,0
+      (totalPrice: number, order: Orders) => totalPrice + order.price,
+      0,
     );
     return totalPrice;
   } else {
