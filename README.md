@@ -35,6 +35,33 @@ This project is a typescript and mongoos server.Which is used to create, update,
     }
 }
 ```
+## Data Example For Creating User
+```
+{
+    "user": {
+        "userId": 4444,
+        "username": "john_hoe",
+        "password": "hashedpassword123",
+        "fullName": {
+            "firstName": "John",
+            "lastName": "Doe"
+        },
+        "age": 30,
+        "email": "john@example.com",
+        "isActive": true,
+        "hobbies": [
+            "reading",
+            "cooking"
+        ],
+        "address": {
+            "street": "123 Main St",
+            "city": "Anytown",
+            "country": "CountryName"
+        }
+        
+    }
+}
+```
 
 ### Type Of Order
 
