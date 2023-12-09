@@ -39,14 +39,14 @@ const user_validation_zod_1 = __importStar(require("./user.validation.zod"));
 const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         //getting user data
-        const { user: UserData } = req.body;
+        const UserData = req.body;
         //validating data by zod
         const zodParsedData = user_validation_zod_1.default.parse(UserData);
         const result = yield user_service_1.userServices.createUserIntoDB(zodParsedData);
         const data = yield user_service_1.userServices.getUserFromDB(result.userId.toString());
         res.status(200).json({
             success: true,
-            massage: 'ser created successfully!',
+            massage: 'Users fetched successfully',
             data: data,
         });
     }
@@ -84,7 +84,7 @@ const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         if (result) {
             res.status(200).json({
                 success: true,
-                massage: 'student found successfully',
+                massage: 'User fetched successfully!',
                 data: result,
             });
         }
