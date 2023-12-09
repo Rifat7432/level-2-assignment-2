@@ -37,8 +37,7 @@ This project is a typescript and mongoos server.Which is used to create, update,
 ```
 ## Data Example For Creating User
 ```
-{
-    "user": {
+ {
         "userId": 4444,
         "username": "john_hoe",
         "password": "hashedpassword123",
@@ -60,7 +59,7 @@ This project is a typescript and mongoos server.Which is used to create, update,
         }
         
     }
-}
+
 ```
 
 ### Type Of Order
